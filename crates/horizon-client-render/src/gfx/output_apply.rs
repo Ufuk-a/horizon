@@ -97,7 +97,6 @@ pub(super) fn surface_config(
     encoding: Option<hdr::Output>,
 ) -> wgpu::SurfaceConfiguration {
     let mut config = config.clone();
-    config.desired_maximum_frame_latency = frame_latency(config.present_mode);
     if let Some(output) = encoding {
         config.format = output.format();
         config.view_formats = vec![output.format()];

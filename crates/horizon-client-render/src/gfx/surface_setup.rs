@@ -96,7 +96,11 @@ pub(super) fn log_configured(config: &wgpu::SurfaceConfiguration, start: Option<
     }
     let line = format!(
         "configuring the surface ({}x{} {:?}, {:?}, {} frames ahead)",
-        config.width, config.height, config.format, config.present_mode, config.desired_maximum_frame_latency
+        config.width,
+        config.height,
+        config.format,
+        config.present_mode,
+        config.desired_maximum_frame_latency
     );
     match start {
         Some(lead) => startup_step(format_args!("{lead}{line}")),

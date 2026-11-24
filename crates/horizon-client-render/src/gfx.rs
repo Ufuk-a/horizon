@@ -6951,6 +6951,11 @@ impl Renderer {
         hdr: Option<&hdr::Hdr>,
         device_lost: &std::sync::atomic::AtomicBool,
     ) -> std::result::Result<(), String> {
+        // Every configuration goes through here, so the frames ahead always follow the mode.
+        let config = &wgpu::SurfaceConfiguration {
+            desired_maximum_frame_latency: output_apply::frame_latency(config.present_mode),
+            ..config.clone()
+        };
         let validation = device.push_error_scope(wgpu::ErrorFilter::Validation);
         let memory = device.push_error_scope(wgpu::ErrorFilter::OutOfMemory);
         {
